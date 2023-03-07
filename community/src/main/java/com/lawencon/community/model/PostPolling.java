@@ -4,8 +4,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -14,16 +13,15 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post_polling")
 public class PostPolling extends BaseEntity {
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
 	
 	@Column(nullable = false)
 	private String pollingTitle;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "photo")
-
 	private File file;
 
 	public Post getPost() {

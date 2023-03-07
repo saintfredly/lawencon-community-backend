@@ -3,7 +3,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -11,14 +11,14 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_post_comment")
 public class PostComment extends BaseEntity {
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
 
 	@Column(name = "the_comment", nullable = false)
 	private String theComment;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 

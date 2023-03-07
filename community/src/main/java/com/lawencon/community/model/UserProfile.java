@@ -3,7 +3,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -12,21 +12,27 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_user_profile")
 public class UserProfile extends BaseEntity {
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(nullable = false, name = "user_id")
 	private User user;
+	
 	@Column(nullable = false, length = 50)
 	private String fullName;
+	
 	@Column(length = 50)
 	private String company;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "industry_id")
 	private Industry industry;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "position_id")
 	private Position position;
+	
 	@Column(columnDefinition = "text")
 	private String address;
+	
 	@Column(length = 15)
 	private String phone;
 

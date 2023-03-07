@@ -11,6 +11,7 @@ import com.lawencon.base.BaseEntity;
 public class Position extends BaseEntity {
 	@Column(unique = true, nullable = false, length = 5)
 	private String positionCode;
+	
 	@Column(nullable = false, length = 50)
 	private String positionName;
 

@@ -11,6 +11,7 @@ import com.lawencon.base.BaseEntity;
 public class Category extends BaseEntity {
 	@Column(unique = true, nullable = false, length = 5)
 	private String categoryCode;
+	
 	@Column(nullable = false, length = 50)
 	private String categoryName;
 
