@@ -2,7 +2,9 @@ package com.lawencon.community.model;
 
 import java.time.LocalDateTime;
 
+
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -11,6 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_voucher")
 public class Voucher extends BaseEntity {
+
 	@Column(unique = true, nullable = false, length = 5)
 	private String voucherCode;
 	
@@ -26,6 +29,7 @@ public class Voucher extends BaseEntity {
 	private LocalDateTime dateStart;
 	
 	@Column(unique = true, nullable = false)
+
 	private LocalDateTime dateExpired;
 
 	public String getVoucherCode() {

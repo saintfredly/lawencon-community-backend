@@ -1,9 +1,11 @@
 package com.lawencon.community.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -11,6 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_course_material")
 public class CourseMaterial extends BaseEntity {
+
 	@Column(nullable = false, length = 50)
 	private String courseMaterialTitle;
 	
@@ -19,6 +22,7 @@ public class CourseMaterial extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
+
 	private Product product;
 
 	public String getCourseMaterialTitle() {

@@ -2,10 +2,12 @@ package com.lawencon.community.model;
 
 import java.time.LocalDateTime;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -13,6 +15,7 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_product")
 public class Product extends BaseEntity {
+
 	@Column(unique = true, nullable = false, length = 5)
 	private String productCode;
 	
@@ -44,6 +47,7 @@ public class Product extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "product_type_id")
+
 	private ProductType productType;
 
 	public String getProductCode() {

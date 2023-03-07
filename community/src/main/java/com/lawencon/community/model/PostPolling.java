@@ -1,9 +1,11 @@
 package com.lawencon.community.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -11,6 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_post_polling")
 public class PostPolling extends BaseEntity {
+
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
@@ -20,6 +23,7 @@ public class PostPolling extends BaseEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "photo")
+
 	private File file;
 
 	public Post getPost() {
@@ -38,6 +42,7 @@ public class PostPolling extends BaseEntity {
 		this.pollingTitle = pollingTitle;
 	}
 
+
 	public File getFile() {
 		return file;
 	}
@@ -45,6 +50,5 @@ public class PostPolling extends BaseEntity {
 	public void setFile(File file) {
 		this.file = file;
 	}
-
 
 }
