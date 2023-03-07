@@ -2,7 +2,12 @@ package com.lawencon.community.model;
 
 import java.time.LocalDateTime;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -10,16 +15,39 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_product")
 public class Product extends BaseEntity {
+
+	@Column(unique = true, nullable = false, length = 5)
 	private String productCode;
+	
+	@Column(nullable = false, length = 50)
 	private String productName;
+	
 	private String productDescription;
 	private String productLocation;
+	
+	@ManyToOne
+	@JoinColumn(name = "photo")
 	private File file;
+	
+	@Column(nullable = false)
 	private String providerName;
+	
+	@Column(nullable = false)
 	private Float price;
+	
+	@Column(nullable = false)
 	private LocalDateTime dateStart;
+	
+	@Column(nullable = false)
 	private LocalDateTime dateEnd;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "product_type_id")
+
 	private ProductType productType;
 
 	public String getProductCode() {
