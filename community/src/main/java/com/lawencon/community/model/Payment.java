@@ -2,7 +2,10 @@ package com.lawencon.community.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -10,10 +13,22 @@ import com.lawencon.base.BaseEntity;
 @Entity
 @Table(name = "t_payment")
 public class Payment extends BaseEntity {
+	@ManyToOne
+	@JoinColumn(name = "voucher_id")
 	private Voucher voucher;
+	
+	@Column(nullable = false)
 	private LocalDateTime datePayment;
+	
+	@Column(nullable = false)
 	private Float grandTotal;
+	
+	@ManyToOne
+	@JoinColumn(name = "proof_of_payment")
 	private File file;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	private Boolean isApproved;
 
