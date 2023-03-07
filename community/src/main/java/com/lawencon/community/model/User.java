@@ -3,7 +3,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -13,12 +13,15 @@ import com.lawencon.base.BaseEntity;
 public class User extends BaseEntity {
 	@Column(unique = true, length = 50, nullable = false)
 	private String email;
+	
 	@Column(nullable = false)
 	private String passwords;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "photo")
 	private File file;
 

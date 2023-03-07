@@ -29,7 +29,6 @@ public class Voucher extends BaseEntity {
 	private LocalDateTime dateStart;
 	
 	@Column(unique = true, nullable = false)
-
 	private LocalDateTime dateExpired;
 
 	public String getVoucherCode() {

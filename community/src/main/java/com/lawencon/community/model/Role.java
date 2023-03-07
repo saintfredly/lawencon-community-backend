@@ -11,6 +11,7 @@ import com.lawencon.base.BaseEntity;
 public class Role extends BaseEntity {
 	@Column(unique = true, length = 5, nullable = false)
 	private String roleCode;
+	
 	@Column(length = 30)
 	private String roleName;
 

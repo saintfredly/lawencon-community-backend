@@ -3,8 +3,7 @@ package com.lawencon.community.model;
 import javax.persistence.Entity;
 
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -13,11 +12,11 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_course_material_file")
 public class CourseMaterialFile extends BaseEntity {
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "course_material_id")
 	private CourseMaterial courseMaterial;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "file_id")
 
 	private File file;

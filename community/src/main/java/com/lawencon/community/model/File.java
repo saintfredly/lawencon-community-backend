@@ -11,8 +11,10 @@ import com.lawencon.base.BaseEntity;
 public class File extends BaseEntity {
 	@Column(nullable = false, columnDefinition = "text")
 	private String fileName;
+	
 	@Column(nullable = false, columnDefinition = "text")
 	private String fileContent;
+	
 	@Column(length = 5, nullable = false)
 	private String fileExtension;
 

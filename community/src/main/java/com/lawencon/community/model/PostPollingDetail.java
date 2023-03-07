@@ -4,8 +4,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -14,12 +13,11 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post_polling_detail")
 public class PostPollingDetail extends BaseEntity {
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "post_polling_id")
 	private PostPolling postPolling;
 	
 	@Column(nullable = false)
-
 	private String optionContent;
 
 	public PostPolling getPostPolling() {

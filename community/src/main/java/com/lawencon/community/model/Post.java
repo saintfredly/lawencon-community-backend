@@ -3,7 +3,7 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.lawencon.base.BaseEntity;
@@ -13,15 +13,19 @@ import com.lawencon.base.BaseEntity;
 public class Post extends BaseEntity {
 	@Column(nullable = false, length = 50)
 	private String postTitle;
+	
 	@Column(nullable = false, columnDefinition = "text")
 	private String postContent;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "post_type_id", nullable = false)
 	private PostType postType;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "photo")
 	private File file;
-	@ManyToOne
+	
+	@OneToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
