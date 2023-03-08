@@ -6,11 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_article")
+@Table(name = "t_article",
+uniqueConstraints = {
+        @UniqueConstraint(name = "article_ck", 
+                columnNames = {"file", "user"}
+        )})
 public class Article extends BaseEntity {
 
 	@Column(nullable = false, length = 50)
@@ -25,7 +30,6 @@ public class Article extends BaseEntity {
 	
 	@OneToOne
 	@JoinColumn(name = "user_id")
-
 	private User user;
 
 	public String getArticleTitle() {

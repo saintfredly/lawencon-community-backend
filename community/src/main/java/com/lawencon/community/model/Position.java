@@ -3,13 +3,18 @@ package com.lawencon.community.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_position")
+@Table(name = "t_position",
+uniqueConstraints = {
+        @UniqueConstraint(name = "position_bk", 
+                columnNames = {"position_code"}
+        )})
 public class Position extends BaseEntity {
-	@Column(unique = true, nullable = false, length = 5)
+	@Column(nullable = false, length = 5)
 	private String positionCode;
 	
 	@Column(nullable = false, length = 50)

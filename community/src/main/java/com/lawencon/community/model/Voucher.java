@@ -7,14 +7,19 @@ import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_voucher")
+@Table(name = "t_voucher",
+uniqueConstraints = {
+        @UniqueConstraint(name = "voucher_bk", 
+                columnNames = {"voucher_code"}
+        )})
 public class Voucher extends BaseEntity {
 
-	@Column(unique = true, nullable = false, length = 5)
+	@Column(nullable = false, length = 5)
 	private String voucherCode;
 	
 	@Column(unique = true, nullable = false, length = 50)
