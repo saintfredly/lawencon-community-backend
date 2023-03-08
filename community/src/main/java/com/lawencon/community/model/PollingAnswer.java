@@ -12,7 +12,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_polling_answer",
 uniqueConstraints = {
         @UniqueConstraint(name = "polling_answer_ck", 
-                columnNames = {"postPollingDetail", "user"}
+                columnNames = {"post_polling_detail_id", "user_id"}
         )})
 public class PollingAnswer extends BaseEntity {
 

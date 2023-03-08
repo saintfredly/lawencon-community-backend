@@ -14,7 +14,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_article",
 uniqueConstraints = {
         @UniqueConstraint(name = "article_ck", 
-                columnNames = {"file", "user"}
+                columnNames = {"photo", "user_id"}
         )})
 public class Article extends BaseEntity {
 

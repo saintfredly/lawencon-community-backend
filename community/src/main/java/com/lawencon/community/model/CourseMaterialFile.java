@@ -13,7 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_course_material_file",
 uniqueConstraints = {
         @UniqueConstraint(name = "course_material_file_ck", 
-                columnNames = {"courseMaterial", "file"}
+                columnNames = {"course_material_id", "file_id"}
         )})
 public class CourseMaterialFile extends BaseEntity {
 

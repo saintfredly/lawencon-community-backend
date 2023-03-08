@@ -13,7 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post_comment",
 uniqueConstraints = {
         @UniqueConstraint(name = "post_comment_ck", 
-                columnNames = {"post", "user"}
+                columnNames = {"post_id", "user_id"}
         )})
 public class PostComment extends BaseEntity {
 	@OneToOne

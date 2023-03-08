@@ -14,7 +14,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post_polling",
 uniqueConstraints = {
         @UniqueConstraint(name = "post_polling_ck", 
-                columnNames = {"post", "file"}
+                columnNames = {"post_id", "photo"}
         )})
 public class PostPolling extends BaseEntity {
 

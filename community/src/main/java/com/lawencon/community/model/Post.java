@@ -13,7 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post",
 uniqueConstraints = {
         @UniqueConstraint(name = "post_ck", 
-                columnNames = {"postType", "file", "category"}
+                columnNames = {"post_type_id", "photo", "category_id"}
         )})
 public class Post extends BaseEntity {
 	@Column(nullable = false, length = 50)

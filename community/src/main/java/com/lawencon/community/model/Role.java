@@ -11,7 +11,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_role",
 uniqueConstraints = {
         @UniqueConstraint(name = "role_bk", 
-                columnNames = {"role_code"}
+                columnNames = {"roleCode"}
         )})
 public class Role extends BaseEntity {
 	@Column(length = 5, nullable = false)
