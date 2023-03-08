@@ -8,26 +8,9 @@ import com.lawencon.community.model.User;
 
 public class UserDao extends BaseMasterDao<User>{
 
-	@Override
-	User insert(User data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	User update(User data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	List<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	Boolean deleteById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
