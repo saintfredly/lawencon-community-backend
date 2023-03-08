@@ -14,7 +14,7 @@ public class IndustryDao extends BaseMasterDao<Industry> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	List<Industry> getAll() {
+	public List<Industry> getAll() {
 		final String sql = "SELECT * FROM t_industry WHERE is_active = TRUE";
 		final List<Industry> res = ConnHandler.getManager().createNativeQuery(sql, Industry.class).getResultList();		
 		return res;
@@ -22,9 +22,14 @@ public class IndustryDao extends BaseMasterDao<Industry> {
 
 
 	@Override
-	Optional<Industry> getById(Long id) {
-		final Industry industry = ConnHandler.getManager().find(Industry.class, id);
-		return Optional.ofNullable(industry);
+	public Optional<Industry> getById(String id) {
+		return Optional.ofNullable(super.getById(Industry.class, id));
+	}
+
+
+	@Override
+	public Optional<Industry> getByIdAndDetach(String id) {
+		return Optional.ofNullable(super.getByIdAndDetach(Industry.class, id));
 	}
 
 }
