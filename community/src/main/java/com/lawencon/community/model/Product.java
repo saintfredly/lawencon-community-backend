@@ -7,14 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_product")
+@Table(name = "t_product",
+uniqueConstraints = {
+        @UniqueConstraint(name = "product_bk", 
+                columnNames = {"product_code"}
+        ), @UniqueConstraint(name = "product_ck", 
+                columnNames = {"file", "category", "productType"}
+        )})
 public class Product extends BaseEntity {
 
-	@Column(unique = true, nullable = false, length = 5)
+	@Column(nullable = false, length = 5)
 	private String productCode;
 	
 	@Column(nullable = false, length = 50)

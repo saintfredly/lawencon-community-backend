@@ -6,11 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_post_polling")
+@Table(name = "t_post_polling",
+uniqueConstraints = {
+        @UniqueConstraint(name = "post_polling_ck", 
+                columnNames = {"post", "file"}
+        )})
 public class PostPolling extends BaseEntity {
 
 	@OneToOne

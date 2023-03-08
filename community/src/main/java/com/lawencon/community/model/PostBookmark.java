@@ -5,11 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_post_bookmark")
+@Table(name = "t_post_bookmark",
+uniqueConstraints = {
+        @UniqueConstraint(name = "post_bookmark_ck", 
+                columnNames = {"post", "user"}
+        )})
 public class PostBookmark extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "post_id")
