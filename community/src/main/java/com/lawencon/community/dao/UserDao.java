@@ -1,22 +1,24 @@
 package com.lawencon.community.dao;
 
-
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import com.lawencon.base.ConnHandler;
+import com.lawencon.community.model.File;
+import com.lawencon.community.model.Role;
 import com.lawencon.community.model.User;
 
 @Repository
-public class UserDao extends BaseMasterDao<User>{
+public class UserDao extends BaseMasterDao<User> {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAll() {
 		final String sql = "SELECT * FROM t_user WHERE is_active = TRUE";
-		final List<User> res = ConnHandler.getManager().createNativeQuery(sql, User.class).getResultList();		
+		final List<User> res = ConnHandler.getManager().createNativeQuery(sql, User.class).getResultList();
 		return res;
 	}
 
@@ -28,6 +30,57 @@ public class UserDao extends BaseMasterDao<User>{
 	@Override
 	public Optional<User> getByIdAndDetach(String id) {
 		return Optional.ofNullable(super.getByIdAndDetach(User.class, id));
-	}	
+	}
+
+	public Optional<User> getByEmail(String email) {
+		User user = null;
+		try {
+			final String sql = "SELECT tu.id,tu.email,tu.passwords,tu.role_id,tr.role_code,tu.photo,"
+					+ "tu.created_by,tu.updated_by,tu.created_at,tu.updated_at"
+					+ ",tu.ver,tu.is_active FROM t_user tu INNER JOIN t_role tr ON tr.id = tu.role_id"
+					+ " WHERE tu.email =:email AND tu.is_active=TRUE";
+
+			final Object result = ConnHandler.getManager().createNativeQuery(sql).setParameter("email", email)
+					.getSingleResult();
+
+			if (result != null) {
+				user = new User();
+				final Object[] objArr = (Object[]) result;
+
+				user.setId(objArr[0].toString());
+				user.setEmail(objArr[1].toString());
+				user.setPasswords(objArr[2].toString());
+
+				final Role role = new Role();
+				role.setId(objArr[3].toString());
+				role.setRoleCode(objArr[4].toString());
+				user.setRole(role);
+
+				final String fileId = objArr[5].toString();
+				final File file = new File();
+				file.setId(fileId);
+
+				user.setFile(file);
+
+				user.setCreatedBy(objArr[6].toString());
+				if (objArr[7] != null) {
+					user.setUpdatedBy(objArr[7].toString());
+				}
+
+				user.setCreatedAt(Timestamp.valueOf(objArr[8].toString()).toLocalDateTime());
+
+				if (objArr[9] != null) {
+					user.setUpdatedAt(Timestamp.valueOf(objArr[9].toString()).toLocalDateTime());
+				}
+				user.setVersion(Integer.valueOf(objArr[10].toString()));
+				user.setIsActive(Boolean.valueOf(objArr[11].toString()));
+			}
+
+		} catch (Exception e) {
+
+		}
+
+		return Optional.ofNullable(user);
+	}
 
 }
