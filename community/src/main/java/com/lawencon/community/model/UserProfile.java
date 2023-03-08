@@ -13,7 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_user_profile",
 uniqueConstraints = {
         @UniqueConstraint(name = "user_profile_ck", 
-                columnNames = {"user", "industry", "position"}
+                columnNames = {"user_id", "industry_id", "position_id"}
         )})
 public class UserProfile extends BaseEntity {
 

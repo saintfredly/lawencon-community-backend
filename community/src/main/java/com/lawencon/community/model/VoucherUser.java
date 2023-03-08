@@ -12,7 +12,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_voucher_user",
 uniqueConstraints = {
         @UniqueConstraint(name = "voucher_user_ck", 
-                columnNames = {"voucher", "user"}
+                columnNames = {"voucher_id", "user_id"}
         )})
 public class VoucherUser extends BaseEntity {
 

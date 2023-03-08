@@ -15,7 +15,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_payment",
 uniqueConstraints = {
         @UniqueConstraint(name = "payment_ck", 
-                columnNames = {"file", "user", "voucher"}
+                columnNames = {"proof_of_payment", "user_id", "voucher_id"}
         )})
 public class Payment extends BaseEntity {
 

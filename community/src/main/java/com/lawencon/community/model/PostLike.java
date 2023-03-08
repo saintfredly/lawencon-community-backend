@@ -12,7 +12,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_post_like",
 uniqueConstraints = {
         @UniqueConstraint(name = "post_like_ck", 
-                columnNames = {"post", "user"}
+                columnNames = {"post_id", "user_id"}
         )})
 public class PostLike extends BaseEntity {
 

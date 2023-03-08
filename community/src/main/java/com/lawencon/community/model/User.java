@@ -15,7 +15,7 @@ uniqueConstraints = {
         @UniqueConstraint(name = "user_bk", 
                 columnNames = {"email"}
         ), @UniqueConstraint(name = "user_ck", 
-                columnNames = {"role", "file"}
+                columnNames = {"role_id", "photo"}
         )})
 public class User extends BaseEntity {
 	@Column(length = 50, nullable = false)

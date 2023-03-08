@@ -15,9 +15,9 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_product",
 uniqueConstraints = {
         @UniqueConstraint(name = "product_bk", 
-                columnNames = {"product_code"}
+                columnNames = {"productCode"}
         ), @UniqueConstraint(name = "product_ck", 
-                columnNames = {"file", "category", "productType"}
+                columnNames = {"photo", "category_id", "product_type_id"}
         )})
 public class Product extends BaseEntity {
 
