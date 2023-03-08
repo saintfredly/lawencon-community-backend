@@ -1,5 +1,5 @@
 package com.lawencon.community.service;
 
-public class UserService {
+public class ProductService {
 
 }

@@ -7,17 +7,6 @@ import com.lawencon.community.model.Industry;
 
 public class IndustryDao extends BaseMasterDao<Industry> {
 
-	@Override
-	Industry insert(Industry data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	Industry update(Industry data) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	List<Industry> getAll() {
@@ -25,11 +14,6 @@ public class IndustryDao extends BaseMasterDao<Industry> {
 		return null;
 	}
 
-	@Override
-	Boolean deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	Optional<Industry> getById(Long id) {
