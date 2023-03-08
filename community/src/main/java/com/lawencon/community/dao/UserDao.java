@@ -14,18 +14,20 @@ public class UserDao extends BaseMasterDao<User>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	List<User> getAll() {
+	public List<User> getAll() {
 		final String sql = "SELECT * FROM t_user WHERE is_active = TRUE";
 		final List<User> res = ConnHandler.getManager().createNativeQuery(sql, User.class).getResultList();		
 		return res;
 	}
 
 	@Override
-	Optional<User> getById(Long id) {
-		final User user = ConnHandler.getManager().find(User.class, id);
-		return Optional.ofNullable(user);
+	public Optional<User> getById(String id) {
+		return Optional.ofNullable(super.getById(User.class, id));
 	}
 
-	
+	@Override
+	public Optional<User> getByIdAndDetach(String id) {
+		return Optional.ofNullable(super.getByIdAndDetach(User.class, id));
+	}	
 
 }

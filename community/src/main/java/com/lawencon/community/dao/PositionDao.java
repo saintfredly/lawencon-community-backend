@@ -14,7 +14,7 @@ public class PositionDao extends BaseMasterDao<Position>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	List<Position> getAll() {
+	public List<Position> getAll() {
 		final String sql = "SELECT * FROM t_position WHERE is_active = TRUE";
 		final List<Position> res = ConnHandler.getManager().createNativeQuery(sql, Position.class).getResultList();		
 		return res;
@@ -22,9 +22,14 @@ public class PositionDao extends BaseMasterDao<Position>{
 
 
 	@Override
-	Optional<Position> getById(Long id) {
-		final Position position = ConnHandler.getManager().find(Position.class, id);
-		return Optional.ofNullable(position);
+	public Optional<Position> getById(String id) {
+		return Optional.ofNullable(super.getById(Position.class, id));
+	}
+
+
+	@Override
+	public Optional<Position> getByIdAndDetach(String id) {
+		return Optional.ofNullable(super.getByIdAndDetach(Position.class, id));
 	}
 
 }
