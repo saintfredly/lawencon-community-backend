@@ -1,27 +1,26 @@
 package com.lawencon.community.dao;
 
-
 import java.util.List;
 import java.util.Optional;
 
-import com.lawencon.community.model.User;
+import com.lawencon.community.model.Category;
 
-public class UserDao extends BaseMasterDao<User>{
+public class CategoryDao extends BaseMasterDao<Category>{
 
 	@Override
-	User insert(User data) {
+	Category insert(Category data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	User update(User data) {
+	Category update(Category data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	List<User> getAll() {
+	List<Category> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +32,7 @@ public class UserDao extends BaseMasterDao<User>{
 	}
 
 	@Override
-	Optional<User> getById(Long id) {
+	Optional<Category> getById(Long id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
