@@ -14,51 +14,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lawencon.community.model.Category;
+import com.lawencon.community.model.Voucher;
 import com.lawencon.community.pojo.PojoRes;
-import com.lawencon.community.pojo.category.PojoCategoryReq;
-import com.lawencon.community.pojo.category.PojoCategoryRes;
-import com.lawencon.community.service.CategoryService;
-
+import com.lawencon.community.pojo.voucher.PojoVoucherReq;
+import com.lawencon.community.pojo.voucher.PojoVoucherRes;
+import com.lawencon.community.service.VoucherService;
 
 @RestController
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("voucher")
+public class VoucherController {
 
-	private final CategoryService categoryService;
-	
-	public CategoryController(CategoryService categoryService) {
-		this.categoryService = categoryService;
+	private final VoucherService voucherService;
+
+	public VoucherController(VoucherService voucherService) {
+		this.voucherService = voucherService;
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<PojoRes> save(@RequestBody PojoCategoryReq data) {
-		final PojoRes res = categoryService.save(data);
+	public ResponseEntity<PojoRes> save(@RequestBody PojoVoucherReq data) {
+		final PojoRes res = voucherService.save(data);
 		return new ResponseEntity<>(res, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<PojoRes> update(@RequestBody PojoCategoryReq data) {
-		final PojoRes res = categoryService.update(data);
+	public ResponseEntity<PojoRes> update(@RequestBody PojoVoucherReq data) {
+		final PojoRes res = voucherService.update(data);
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<PojoRes> deleteById(@PathVariable("id") String id) {
-		final PojoRes res = categoryService.deleteById(id);
+		final PojoRes res = voucherService.deleteById(id);
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<List<PojoCategoryRes>> getAll() {
-		final List<PojoCategoryRes> res = categoryService.getAll();
+	public ResponseEntity<List<PojoVoucherRes>> getAll() {
+		final List<PojoVoucherRes> res = voucherService.getAll();
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Category>> getById(
-			@PathVariable("id") String id){
-		final Optional<Category> res = categoryService.getById(id);
+	public ResponseEntity<Optional<Voucher>> getById(@PathVariable("id") String id) {
+		final Optional<Voucher> res = voucherService.getById(id);
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 }

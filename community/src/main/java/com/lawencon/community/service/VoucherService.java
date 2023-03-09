@@ -28,41 +28,50 @@ public class VoucherService {
 		final String generateCode = GenerateId.generateCode(5);
 		Voucher voucher = new Voucher();
 
-		if (data.getId() != null) {
-
-			voucher = voucherDao.getByIdAndDetach(data.getId()).get();
-
+		if (data.getVoucherCode() != null) {
 			voucher.setVoucherCode(data.getVoucherCode());
-			voucher.setVoucherName(data.getVoucherName());
-			voucher.setVoucherDescription(data.getVoucherDescription());
-			voucher.setAmount(data.getAmount());
-			voucher.setDateStart(data.getDateStart());
-			voucher.setDateExpired(data.getDateExpired());
-
-			voucher.setVersion(data.getVer());
-			voucher.setIsActive(data.getIsActive());
-
 		} else {
-			if (data.getVoucherCode() != null) {
-				voucher.setVoucherCode(data.getVoucherCode());
-			} else {
-				voucher.setVoucherCode(generateCode);
-			}
-
-			voucher.setVoucherName(data.getVoucherName());
-			voucher.setVoucherDescription(data.getVoucherDescription());
-			voucher.setAmount(data.getAmount());
-			voucher.setDateStart(data.getDateStart());
-			voucher.setDateExpired(data.getDateExpired());
-
-			voucher.setIsActive(true);
+			voucher.setVoucherCode(generateCode);
 		}
+
+		voucher.setVoucherName(data.getVoucherName());
+		voucher.setVoucherDescription(data.getVoucherDescription());
+		voucher.setAmount(data.getAmount());
+		voucher.setDateStart(data.getDateStart());
+		voucher.setDateExpired(data.getDateExpired());
+
+		voucher.setIsActive(true);
 
 		voucherDao.save(voucher);
 		ConnHandler.commit();
 
 		final PojoRes pojoRes = new PojoRes();
 		pojoRes.setMessage("Save Success!");
+		return pojoRes;
+	}
+
+	public PojoRes update(PojoVoucherReq data) {
+		ConnHandler.begin();
+
+		Voucher voucher = new Voucher();
+
+		voucher = voucherDao.getByIdAndDetach(data.getId()).get();
+
+		voucher.setVoucherCode(data.getVoucherCode());
+		voucher.setVoucherName(data.getVoucherName());
+		voucher.setVoucherDescription(data.getVoucherDescription());
+		voucher.setAmount(data.getAmount());
+		voucher.setDateStart(data.getDateStart());
+		voucher.setDateExpired(data.getDateExpired());
+
+		voucher.setVersion(data.getVer());
+		voucher.setIsActive(data.getIsActive());
+
+		voucherDao.save(voucher);
+		ConnHandler.commit();
+
+		final PojoRes pojoRes = new PojoRes();
+		pojoRes.setMessage("Update Success!");
 		return pojoRes;
 	}
 
