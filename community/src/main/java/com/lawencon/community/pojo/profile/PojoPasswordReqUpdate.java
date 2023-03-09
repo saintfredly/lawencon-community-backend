@@ -4,7 +4,14 @@ public class PojoPasswordReqUpdate {
 	private String oldPassword;
 	private String newPassword;
 	private String usedId;
+	private Integer ver;
 	
+	public Integer getVer() {
+		return ver;
+	}
+	public void setVer(Integer ver) {
+		this.ver = ver;
+	}
 	public String getOldPassword() {
 		return oldPassword;
 	}

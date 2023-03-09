@@ -3,16 +3,23 @@ package com.lawencon.community.pojo.profile;
 public class PojoProfileResGetAll {
 	private String userProfileId;
 	private String userId;
+	private String photo;
 	private String fullName;
 	private String email;
 	private String phone;
 	private String address;
 	private String company;
-	private Long industryId;
-	private Long positionId;
+	private String industryId;
+	private String positionId;
 	private String industryName;
 	private String positionName;
 	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public String getUserProfileId() {
 		return userProfileId;
 	}
@@ -55,18 +62,6 @@ public class PojoProfileResGetAll {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Long getIndustryId() {
-		return industryId;
-	}
-	public void setIndustryId(Long industryId) {
-		this.industryId = industryId;
-	}
-	public Long getPositionId() {
-		return positionId;
-	}
-	public void setPositionId(Long positionId) {
-		this.positionId = positionId;
-	}
 	public String getIndustryName() {
 		return industryName;
 	}
@@ -78,5 +73,17 @@ public class PojoProfileResGetAll {
 	}
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
+	}
+	public String getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(String industryId) {
+		this.industryId = industryId;
+	}
+	public String getPositionId() {
+		return positionId;
+	}
+	public void setPositionId(String positionId) {
+		this.positionId = positionId;
 	}
 }
