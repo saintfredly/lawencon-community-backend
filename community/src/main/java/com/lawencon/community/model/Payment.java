@@ -15,13 +15,17 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_payment",
 uniqueConstraints = {
         @UniqueConstraint(name = "payment_ck", 
-                columnNames = {"proof_of_payment", "user_id", "voucher_id"}
+                columnNames = {"proof_of_payment", "user_id", "voucher_id", "product_id"}
         )})
 public class Payment extends BaseEntity {
 
 	@OneToOne
 	@JoinColumn(name = "voucher_id")
 	private Voucher voucher;
+	
+	@OneToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 	
 	@Column(nullable = false)
 	private LocalDateTime datePayment;
@@ -44,6 +48,14 @@ public class Payment extends BaseEntity {
 
 	public void setVoucher(Voucher voucher) {
 		this.voucher = voucher;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public LocalDateTime getDatePayment() {
