@@ -7,9 +7,16 @@ public class PojoProfileReqUpdate {
 	private String phone;
 	private String address;
 	private String company;
-	private Long industryId;
-	private Long positionId;
+	private String industryId;
+	private String positionId;
+	private Integer ver;
 	
+	public Integer getVer() {
+		return ver;
+	}
+	public void setVer(Integer ver) {
+		this.ver = ver;
+	}
 	public String getUserProfileId() {
 		return userProfileId;
 	}
@@ -46,16 +53,16 @@ public class PojoProfileReqUpdate {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Long getIndustryId() {
+	public String getIndustryId() {
 		return industryId;
 	}
-	public void setIndustryId(Long industryId) {
+	public void setIndustryId(String industryId) {
 		this.industryId = industryId;
 	}
-	public Long getPositionId() {
+	public String getPositionId() {
 		return positionId;
 	}
-	public void setPositionId(Long positionId) {
+	public void setPositionId(String positionId) {
 		this.positionId = positionId;
 	}
 }
