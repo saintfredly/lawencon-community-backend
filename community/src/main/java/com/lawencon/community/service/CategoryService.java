@@ -28,28 +28,39 @@ public class CategoryService {
 
 		final String generateCode = GenerateId.generateCode(5);
 
-		Category category = new Category();
+		final Category category = new Category();
 
-		if (data.getId() != null) {
-
-			category = categoryDao.getByIdAndDetach(data.getId()).get();
-
-			category.setCategoryName(data.getCategoryName());
-			category.setVersion(data.getVer());
-
-			category.setIsActive(data.getIsActive());
-
-		} else {
-			category.setCategoryCode(generateCode);
-			category.setCategoryName(data.getCategoryName());
-			category.setIsActive(true);
-		}
+		category.setCategoryCode(generateCode);
+		category.setCategoryName(data.getCategoryName());
+		category.setIsActive(true);
 
 		categoryDao.save(category);
 		ConnHandler.commit();
 
 		final PojoRes pojoRes = new PojoRes();
 		pojoRes.setMessage("Save Success!");
+		return pojoRes;
+
+	}
+
+	public PojoRes update(PojoCategoryReq data) {
+
+		ConnHandler.begin();
+
+		Category category = new Category();
+
+		category = categoryDao.getByIdAndDetach(data.getId()).get();
+
+		category.setCategoryName(data.getCategoryName());
+		category.setVersion(data.getVer());
+
+		category.setIsActive(data.getIsActive());
+
+		categoryDao.save(category);
+		ConnHandler.commit();
+
+		final PojoRes pojoRes = new PojoRes();
+		pojoRes.setMessage("Update Success!");
 		return pojoRes;
 
 	}
@@ -85,7 +96,7 @@ public class CategoryService {
 			pojoCategoryRes.setCreatedAt(category.get(i).getCreatedAt());
 			pojoCategoryRes.setIsActive(category.get(i).getIsActive());
 			pojoCategoryRes.setVer(category.get(i).getVersion());
-			
+
 			pojoResGet.add(pojoCategoryRes);
 		}
 
