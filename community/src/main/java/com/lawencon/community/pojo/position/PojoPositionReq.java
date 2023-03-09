@@ -1,8 +1,8 @@
-package com.lawencon.community.pojo.industry;
+package com.lawencon.community.pojo.position;
 
-public class PojoIndustryReq {
+public class PojoPositionReq {
 	private String id;
-	private String industryName;
+	private String positionName;
 	private Integer ver;
 	private Boolean isActive;
 
@@ -14,14 +14,14 @@ public class PojoIndustryReq {
 		this.id = id;
 	}
 
-	public String getIndustryName() {
-		return industryName;
+	public String getPositionName() {
+		return positionName;
 	}
 
-	public void setIndustryName(String industryName) {
-		this.industryName = industryName;
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
-
+	
 	public Integer getVer() {
 		return ver;
 	}
