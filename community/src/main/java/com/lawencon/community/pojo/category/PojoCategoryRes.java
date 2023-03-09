@@ -7,6 +7,7 @@ public class PojoCategoryRes {
 	private String categoryName;
 	private LocalDateTime createdAt;
 	private Boolean isActive;
+	private Integer ver;
 
 	public String getCategoryCode() {
 		return categoryCode;
@@ -38,6 +39,14 @@ public class PojoCategoryRes {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public Integer getVer() {
+		return ver;
+	}
+
+	public void setVer(Integer ver) {
+		this.ver = ver;
 	}
 
 }

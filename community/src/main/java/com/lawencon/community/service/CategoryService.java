@@ -2,6 +2,7 @@ package com.lawencon.community.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -78,16 +79,22 @@ public class CategoryService {
 
 		for (int i = 0; i < category.size(); i++) {
 			final PojoCategoryRes pojoCategoryRes = new PojoCategoryRes();
-			
+
 			pojoCategoryRes.setCategoryCode(category.get(i).getCategoryCode());
 			pojoCategoryRes.setCategoryName(category.get(i).getCategoryName());
 			pojoCategoryRes.setCreatedAt(category.get(i).getCreatedAt());
 			pojoCategoryRes.setIsActive(category.get(i).getIsActive());
+			pojoCategoryRes.setVer(category.get(i).getVersion());
 			
 			pojoResGet.add(pojoCategoryRes);
 		}
 
 		return pojoResGet;
+
+	}
+
+	public Optional<Category> getById(String id) {
+		return categoryDao.getById(id);
 
 	}
 }
