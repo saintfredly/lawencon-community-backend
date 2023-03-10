@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.community.service.JWTService;
 import com.lawencon.community.service.UserService;
+import com.lawencon.community.pojo.PojoRes;
 import com.lawencon.community.pojo.login.PojoLoginReq;
 import com.lawencon.community.pojo.login.PojoLoginRes;
+import com.lawencon.community.pojo.user.PojoUserReq;
 import com.lawencon.community.model.User;
 
 @RestController
@@ -61,4 +63,11 @@ public class UserController {
 
 		return new ResponseEntity<>(loginRes, HttpStatus.OK);
 	}
+	
+	@PostMapping("register")
+	public ResponseEntity<PojoRes> register(@RequestBody PojoUserReq data) throws Exception{
+		final PojoRes res = userService.register(data);
+		return new ResponseEntity<>(res, HttpStatus.CREATED);
+	}
+	
 }

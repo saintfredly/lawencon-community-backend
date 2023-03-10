@@ -12,4 +12,8 @@ public abstract class BaseMasterDao<T> extends AbstractJpaDao {
 	abstract Optional<T> getById(String id);
 	
 	abstract Optional<T> getByIdAndDetach(String id);
+	
+	protected String toStr(final StringBuilder str) {
+		return str.toString();
+	}
 }
