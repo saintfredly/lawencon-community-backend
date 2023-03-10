@@ -3,14 +3,14 @@ package com.lawencon.community.pojo.product;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.lawencon.community.pojo.file.PojoFileReqInsert;
+import com.lawencon.community.pojo.file.PojoFileReq;
 
 public class PojoProductReq {
 	private String id;
 	private String productName;
 	private String productDescription;
 	private String productLocation;
-	private PojoFileReqInsert photo;
+	private PojoFileReq photo;
 	private String providerName;
 	private BigDecimal price;
 	private LocalDateTime dateStart;
@@ -52,11 +52,11 @@ public class PojoProductReq {
 		this.productLocation = productLocation;
 	}
 
-	public PojoFileReqInsert getPhoto() {
+	public PojoFileReq getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(PojoFileReqInsert photo) {
+	public void setPhoto(PojoFileReq photo) {
 		this.photo = photo;
 	}
 
