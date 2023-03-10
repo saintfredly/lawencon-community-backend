@@ -1,5 +1,6 @@
 package com.lawencon.community.pojo.product;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.lawencon.community.pojo.file.PojoFileReqInsert;
@@ -11,7 +12,7 @@ public class PojoProductReq {
 	private String productLocation;
 	private PojoFileReqInsert photo;
 	private String providerName;
-	private float price;
+	private BigDecimal price;
 	private LocalDateTime dateStart;
 	private LocalDateTime dateEnd;
 	private String categoryId;
@@ -67,13 +68,6 @@ public class PojoProductReq {
 		this.providerName = providerName;
 	}
 
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
 
 	public LocalDateTime getDateStart() {
 		return dateStart;
@@ -121,6 +115,14 @@ public class PojoProductReq {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 }

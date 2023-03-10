@@ -1,5 +1,6 @@
 package com.lawencon.community.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class Product extends BaseEntity {
 	private String providerName;
 	
 	@Column(nullable = false)
-	private Float price;
+	private BigDecimal price;
 	
 	@Column(nullable = false)
 	private LocalDateTime dateStart;
@@ -102,11 +103,11 @@ public class Product extends BaseEntity {
 		this.providerName = providerName;
 	}
 
-	public Float getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
