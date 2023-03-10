@@ -2,8 +2,10 @@ package com.lawencon.community.pojo.user;
 
 public class PojoUserReq {
 	private String email;
-	private String passwords;
+	private String password;
 	private String fullName;
+	private String company;
+	private String positionId;
 
 	public String getEmail() {
 		return email;
@@ -13,12 +15,12 @@ public class PojoUserReq {
 		this.email = email;
 	}
 
-	public String getPasswords() {
-		return passwords;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswords(String passwords) {
-		this.passwords = passwords;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFullName() {
@@ -27,6 +29,22 @@ public class PojoUserReq {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(String positionId) {
+		this.positionId = positionId;
 	}
 
 }

@@ -8,15 +8,35 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.lawencon.community.constant.RoleEnum;
+import com.lawencon.community.dao.PositionDao;
+import com.lawencon.community.dao.RoleDao;
 import com.lawencon.community.dao.UserDao;
+import com.lawencon.community.dao.UserProfileDao;
+import com.lawencon.community.model.EmailDetails;
+import com.lawencon.community.model.Position;
+import com.lawencon.community.model.Role;
 import com.lawencon.community.model.User;
+import com.lawencon.community.model.UserProfile;
+import com.lawencon.community.pojo.PojoRes;
+import com.lawencon.community.pojo.user.PojoUserReq;
+import com.lawencon.community.util.GenerateId;
 
 @Service
 public class UserService implements UserDetailsService {
 	private final UserDao userDao;
+	private final RoleDao roleDao;
+	private final UserProfileDao userProfileDao;
+	private final PositionDao positionDao; 
+	private final EmailService emailService;
 
-	public UserService(UserDao userDao) {
+	public UserService(UserDao userDao, RoleDao roleDao, UserProfileDao userProfileDao,
+			PositionDao positionDao, EmailService emailService) {
 		this.userDao = userDao;
+		this.roleDao = roleDao;
+		this.userProfileDao = userProfileDao;
+		this.positionDao = positionDao;
+		this.emailService = emailService;
 	}
 
 	@Override
@@ -32,5 +52,44 @@ public class UserService implements UserDetailsService {
 
 	public Optional<User> getByEmail(String email) {
 		return userDao.getByEmail(email);
+	}
+	
+	public PojoRes register(PojoUserReq data) {
+		final String verificationCode = GenerateId.generateCode(6);
+		
+		final User systemId = userDao.getUserByRoleCode(RoleEnum.SYSTEM.getRoleCode()).get();
+		final Role role = roleDao.getRoleByRoleCode(RoleEnum.MEMBER.getRoleCode()).get();
+		
+		final Position position = positionDao.getByIdRef(data.getPositionId()).get();
+		
+		final User user = new User();
+		user.setEmail(data.getEmail());
+		user.setPasswords(data.getPassword());
+		user.setRole(role);
+		user.setCreatedBy(systemId.getId());
+		user.setIsActive(true);
+		userDao.saveNoLogin(user, ()-> systemId.getId());
+		
+		final UserProfile userProfile = new UserProfile();
+		userProfile.setUser(user);
+		userProfile.setFullName(data.getFullName());
+		userProfile.setCompany(data.getCompany());
+		userProfile.setPosition(position);
+		userProfile.setCreatedBy(systemId.getId());
+		userProfile.setIsActive(true);
+		userProfileDao.saveNoLogin(userProfile, ()-> systemId.getId());
+		
+		final EmailDetails email = new EmailDetails();
+		email.setRecipient(data.getEmail());
+		email.setSubject("Registrasi");
+//		ini harusnya stringbuilder
+		email.setMsgBody("Hello, ini adalah password anda: " + data.getPassword() + " Kode verifikasi anda adalah: " + verificationCode);
+		
+		new Thread(() -> emailService.sendSimpleMail(email)).start();
+		
+		final PojoRes pojoRes = new PojoRes();
+		pojoRes.setMessage("Register Success!");
+		
+		return pojoRes;
 	}
 }

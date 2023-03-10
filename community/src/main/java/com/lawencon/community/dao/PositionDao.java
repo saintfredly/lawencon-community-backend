@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lawencon.base.ConnHandler;
 import com.lawencon.community.model.Position;
+import com.lawencon.community.model.User;
 
 @Repository
 public class PositionDao extends BaseMasterDao<Position>{
@@ -31,5 +32,9 @@ public class PositionDao extends BaseMasterDao<Position>{
 	public Optional<Position> getByIdAndDetach(String id) {
 		return Optional.ofNullable(super.getByIdAndDetach(Position.class, id));
 	}
+	
+	public Optional<Position> getByIdRef(String id) {
+		return Optional.ofNullable(super.getByIdRef(Position.class, id));
+	} 
 
 }
