@@ -21,8 +21,7 @@ public class ProductDao extends BaseMasterDao<Product> {
 
 	@Override
 	public Optional<Product> getById(String id) {
-		final Product product = ConnHandler.getManager().find(Product.class, id);
-		return Optional.ofNullable(product);
+		return Optional.ofNullable(super.getById(Product.class, id));
 	}
 
 	@Override

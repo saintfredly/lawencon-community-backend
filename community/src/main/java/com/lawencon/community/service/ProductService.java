@@ -88,10 +88,13 @@ public class ProductService {
 		product.setProductDescription(data.getProductDescription());
 		product.setProductLocation(data.getProductLocation());
 
-		final File file = new File();
+		File file = new File();
+		file = fileDao.getByIdAndDetach(File.class, data.getPhoto().getId());
 		file.setFileName(data.getPhoto().getFileName());
 		file.setFileContent(data.getPhoto().getFileContent());
 		file.setFileExtension(data.getPhoto().getFileExtension());
+		
+		file.setVersion(data.getPhoto().getVer());
 		file.setIsActive(true);
 
 		fileDao.save(file);
