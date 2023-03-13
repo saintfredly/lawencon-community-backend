@@ -3,6 +3,7 @@ package com.lawencon.community.pojo.voucher;
 import java.time.LocalDateTime;
 
 public class PojoVoucherRes {
+	private String id;
 	private String voucherCode;
 	private String voucherName;
 	private String voucherDescription;
@@ -83,6 +84,14 @@ public class PojoVoucherRes {
 
 	public void setVer(Integer ver) {
 		this.ver = ver;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

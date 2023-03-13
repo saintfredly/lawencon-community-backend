@@ -91,6 +91,7 @@ public class CategoryService {
 		for (int i = 0; i < category.size(); i++) {
 			final PojoCategoryRes pojoCategoryRes = new PojoCategoryRes();
 
+			pojoCategoryRes.setId(category.get(i).getId());
 			pojoCategoryRes.setCategoryCode(category.get(i).getCategoryCode());
 			pojoCategoryRes.setCategoryName(category.get(i).getCategoryName());
 			pojoCategoryRes.setCreatedAt(category.get(i).getCreatedAt());

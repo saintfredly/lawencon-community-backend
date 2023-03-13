@@ -3,6 +3,7 @@ package com.lawencon.community.pojo.category;
 import java.time.LocalDateTime;
 
 public class PojoCategoryRes {
+	private String id;
 	private String categoryCode;
 	private String categoryName;
 	private LocalDateTime createdAt;
@@ -47,6 +48,14 @@ public class PojoCategoryRes {
 
 	public void setVer(Integer ver) {
 		this.ver = ver;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
