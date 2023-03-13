@@ -57,9 +57,21 @@ public class PostController {
 		return new ResponseEntity<>(res, HttpStatus.CREATED);
 	}
 	
+	@DeleteMapping("/like/{id}")
+	public ResponseEntity<PojoRes> deleteLike(@PathVariable("id") String id) {
+		final PojoRes res = postService.deleteLike(id);
+		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
+	
 	@PostMapping("/bookmark")
 	public ResponseEntity<PojoRes> saveBookmark(@RequestBody PojoPostBookmarkReq data) {
 		final PojoRes res = postService.saveBookmark(data);
 		return new ResponseEntity<>(res, HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/bookmark/{id}")
+	public ResponseEntity<PojoRes> deleteBookmark(@PathVariable("id") String id) {
+		final PojoRes res = postService.deleteBookmark(id);
+		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 }

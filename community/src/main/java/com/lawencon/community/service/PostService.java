@@ -49,9 +49,10 @@ public class PostService {
 	@Inject
 	private final PrincipalService principalService;
 
-	public PostService(PostLikeDao postLikeDao,PostBookmarkDao postBookmarkDao,PostCommentDao postCommentDao, UserDao userDao, PrincipalService principalService,
-			PostPollingDetailDao postPollingDetailDao, PostPollingDao postPollingDao, PostDao postDao,
-			PostTypeDao postTypeDao, FileDao fileDao, CategoryDao categoryDao) {
+	public PostService(PostLikeDao postLikeDao, PostBookmarkDao postBookmarkDao, PostCommentDao postCommentDao,
+			UserDao userDao, PrincipalService principalService, PostPollingDetailDao postPollingDetailDao,
+			PostPollingDao postPollingDao, PostDao postDao, PostTypeDao postTypeDao, FileDao fileDao,
+			CategoryDao categoryDao) {
 		this.postDao = postDao;
 		this.postTypeDao = postTypeDao;
 		this.fileDao = fileDao;
@@ -253,47 +254,80 @@ public class PostService {
 		pojoRes.setMessage("Success give comment!");
 		return pojoRes;
 	}
-	
+
 	public PojoRes saveLike(PojoPostLikeReq data) {
 		ConnHandler.begin();
 		final PostLike postLike = new PostLike();
-		
+
 		final Post post = postDao.getByIdRef(Post.class, data.getPostId());
 		postLike.setPost(post);
-		
+
 		final User user = userDao.getByIdRef(User.class, principalService.getAuthPrincipal());
 		postLike.setUser(user);
-		
+
 		postLike.setStatus(data.getStatus());
 		postLike.setIsActive(true);
-		
+
 		postLikeDao.save(postLike);
-		
+
 		ConnHandler.commit();
 		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Liked posts!");
+		pojoRes.setMessage("Like posts!");
 		return pojoRes;
 	}
-	
+
+	public PojoRes deleteLike(String id) {
+		ConnHandler.begin();
+		final PojoRes pojoRes = new PojoRes();
+		pojoRes.setMessage("Unlike Posts!");
+		final PojoRes pojoResFail = new PojoRes();
+		pojoResFail.setMessage("Unlike Failed!");
+
+		Boolean result = postLikeDao.deleteById(PostLike.class, id);
+		ConnHandler.commit();
+
+		if (result == true) {
+			return pojoRes;
+		} else {
+			return pojoResFail;
+		}
+	}
+
 	public PojoRes saveBookmark(PojoPostBookmarkReq data) {
 		ConnHandler.begin();
 		final PostBookmark postBookmark = new PostBookmark();
-		
+
 		final Post post = postDao.getByIdRef(Post.class, data.getPostId());
 		postBookmark.setPost(post);
-		
+
 		final User user = userDao.getByIdRef(User.class, principalService.getAuthPrincipal());
 		postBookmark.setUser(user);
-		
+
 		postBookmark.setStatus(data.getStatus());
 		postBookmark.setIsActive(true);
-		
+
 		postBookmarkDao.save(postBookmark);
-		
+
 		ConnHandler.commit();
 		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Bookmarked posts!");
+		pojoRes.setMessage("Bookmark posts!");
 		return pojoRes;
 	}
-	
+
+	public PojoRes deleteBookmark(String id) {
+		ConnHandler.begin();
+		final PojoRes pojoRes = new PojoRes();
+		pojoRes.setMessage("Unbookmark Posts!");
+		final PojoRes pojoResFail = new PojoRes();
+		pojoResFail.setMessage("Unbookmark Failed!");
+
+		Boolean result = postBookmarkDao.deleteById(PostBookmark.class, id);
+		ConnHandler.commit();
+
+		if (result == true) {
+			return pojoRes;
+		} else {
+			return pojoResFail;
+		}
+	}
 }
