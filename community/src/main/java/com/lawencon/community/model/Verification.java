@@ -1,5 +1,7 @@
 package com.lawencon.community.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,7 +15,9 @@ public class Verification extends BaseEntity {
 	private String email;
 	
 	@Column(length = 6, nullable = false)
-	private String vCode;
+	private String verificationCode;
+	
+	private LocalDateTime expire;
 
 	public String getEmail() {
 		return email;
@@ -22,12 +26,21 @@ public class Verification extends BaseEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getvCode() {
-		return vCode;
+	public String getVerificationCode() {
+		return verificationCode;
 	}
 
-	public void setvCode(String vCode) {
-		this.vCode = vCode;
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
+
+	public LocalDateTime getExpire() {
+		return expire;
+	}
+
+	public void setExpire(LocalDateTime expire) {
+		this.expire = expire;
+	}
+	
+	
 }
