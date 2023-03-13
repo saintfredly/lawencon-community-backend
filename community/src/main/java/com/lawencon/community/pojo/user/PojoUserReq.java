@@ -6,6 +6,7 @@ public class PojoUserReq {
 	private String fullName;
 	private String company;
 	private String positionId;
+	private String verificationCode;
 
 	public String getEmail() {
 		return email;
@@ -45,6 +46,14 @@ public class PojoUserReq {
 
 	public void setPositionId(String positionId) {
 		this.positionId = positionId;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
 
 }

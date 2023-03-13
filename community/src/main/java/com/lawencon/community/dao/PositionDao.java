@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.lawencon.base.ConnHandler;
 import com.lawencon.community.model.Position;
-import com.lawencon.community.model.User;
 
 @Repository
 public class PositionDao extends BaseMasterDao<Position>{

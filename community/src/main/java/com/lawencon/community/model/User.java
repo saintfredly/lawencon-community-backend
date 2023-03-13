@@ -13,7 +13,7 @@ import com.lawencon.base.BaseEntity;
 @Table(name = "t_user",
 uniqueConstraints = {
         @UniqueConstraint(name = "user_bk", 
-                columnNames = {"email"}
+                columnNames = {"email", "verificationCode"}
         ), @UniqueConstraint(name = "user_ck", 
                 columnNames = {"role_id", "photo"}
         )})
@@ -31,6 +31,11 @@ public class User extends BaseEntity {
 	@OneToOne
 	@JoinColumn(name = "photo")
 	private File file;
+	
+	@Column(length = 6, nullable = false)
+	private String verificationCode;
+	
+	private Boolean isVerified;
 
 	public String getEmail() {
 		return email;
@@ -62,6 +67,22 @@ public class User extends BaseEntity {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public Boolean getIsVerified() {
+		return isVerified;
+	}
+
+	public void setIsVerified(Boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
 }

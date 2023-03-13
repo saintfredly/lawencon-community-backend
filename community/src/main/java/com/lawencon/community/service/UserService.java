@@ -3,16 +3,20 @@ package com.lawencon.community.service;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lawencon.base.ConnHandler;
 import com.lawencon.community.constant.RoleEnum;
 import com.lawencon.community.dao.PositionDao;
 import com.lawencon.community.dao.RoleDao;
 import com.lawencon.community.dao.UserDao;
 import com.lawencon.community.dao.UserProfileDao;
+import com.lawencon.community.dao.VerificationDao;
 import com.lawencon.community.model.EmailDetails;
 import com.lawencon.community.model.Position;
 import com.lawencon.community.model.Role;
@@ -28,14 +32,19 @@ public class UserService implements UserDetailsService {
 	private final RoleDao roleDao;
 	private final UserProfileDao userProfileDao;
 	private final PositionDao positionDao; 
+	private final VerificationDao verificationDao;
 	private final EmailService emailService;
+	
+	@Autowired
+    private PasswordEncoder encoder;
 
 	public UserService(UserDao userDao, RoleDao roleDao, UserProfileDao userProfileDao,
-			PositionDao positionDao, EmailService emailService) {
+			PositionDao positionDao, VerificationDao verificationDao, EmailService emailService) {
 		this.userDao = userDao;
 		this.roleDao = roleDao;
 		this.userProfileDao = userProfileDao;
 		this.positionDao = positionDao;
+		this.verificationDao = verificationDao;
 		this.emailService = emailService;
 	}
 
@@ -55,7 +64,12 @@ public class UserService implements UserDetailsService {
 	}
 	
 	public PojoRes register(PojoUserReq data) {
-		final String verificationCode = GenerateId.generateCode(6);
+		ConnHandler.begin();
+//		final String verificationCode = GenerateId.generateCode(6);
+		
+		if(verificationDao.getByVerificationCode(data.getEmail(), data.getVerificationCode()).isEmpty()) {
+			throw new RuntimeException("Kode verifikasi anda tidak cocok atau masa berlakunya telah berakhir!");
+		}
 		
 		final User systemId = userDao.getUserByRoleCode(RoleEnum.SYSTEM.getRoleCode()).get();
 		final Role role = roleDao.getRoleByRoleCode(RoleEnum.MEMBER.getRoleCode()).get();
@@ -64,8 +78,10 @@ public class UserService implements UserDetailsService {
 		
 		final User user = new User();
 		user.setEmail(data.getEmail());
-		user.setPasswords(data.getPassword());
+		user.setPasswords(encoder.encode(data.getPassword()));
 		user.setRole(role);
+		user.setVerificationCode(data.getVerificationCode());
+		user.setIsVerified(true);
 		user.setCreatedBy(systemId.getId());
 		user.setIsActive(true);
 		userDao.saveNoLogin(user, ()-> systemId.getId());
@@ -78,12 +94,13 @@ public class UserService implements UserDetailsService {
 		userProfile.setCreatedBy(systemId.getId());
 		userProfile.setIsActive(true);
 		userProfileDao.saveNoLogin(userProfile, ()-> systemId.getId());
+		ConnHandler.commit();
 		
 		final EmailDetails email = new EmailDetails();
 		email.setRecipient(data.getEmail());
-		email.setSubject("Registrasi");
+		email.setSubject("Registrasi Berhasil");
 //		ini harusnya stringbuilder
-		email.setMsgBody("Hello, ini adalah password anda: " + data.getPassword() + " Kode verifikasi anda adalah: " + verificationCode);
+		email.setMsgBody("Hai, selamat anda telah berhasil registrasi, password yang anda buat: " + data.getPassword());
 		
 		new Thread(() -> emailService.sendSimpleMail(email)).start();
 		
