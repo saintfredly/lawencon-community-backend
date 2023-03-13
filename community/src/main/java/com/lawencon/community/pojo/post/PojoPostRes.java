@@ -11,6 +11,7 @@ public class PojoPostRes {
 	private String photo;
 	private String categoryId;
 	private List<PojoPostCommentRes> theComment;
+	private PojoPostPollingRes polling;
 	private String createdBy;
 	private LocalDateTime createdAt;
 	private Boolean isLike;
@@ -111,6 +112,14 @@ public class PojoPostRes {
 
 	public void setVer(Integer ver) {
 		this.ver = ver;
+	}
+
+	public PojoPostPollingRes getPolling() {
+		return polling;
+	}
+
+	public void setPolling(PojoPostPollingRes polling) {
+		this.polling = polling;
 	}
 
 }

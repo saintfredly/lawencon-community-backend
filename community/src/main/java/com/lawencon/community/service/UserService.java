@@ -24,7 +24,6 @@ import com.lawencon.community.model.User;
 import com.lawencon.community.model.UserProfile;
 import com.lawencon.community.pojo.PojoRes;
 import com.lawencon.community.pojo.user.PojoUserReq;
-import com.lawencon.community.util.GenerateId;
 
 @Service
 public class UserService implements UserDetailsService {

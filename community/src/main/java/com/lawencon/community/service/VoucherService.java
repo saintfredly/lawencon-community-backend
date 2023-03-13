@@ -99,6 +99,7 @@ public class VoucherService {
 
 		for (int i = 0; i < voucher.size(); i++) {
 			final PojoVoucherRes pojoVoucherRes = new PojoVoucherRes();
+			pojoVoucherRes.setId(voucher.get(i).getId());
 			pojoVoucherRes.setVoucherCode(voucher.get(i).getVoucherCode());
 			pojoVoucherRes.setVoucherName(voucher.get(i).getVoucherName());
 			pojoVoucherRes.setVoucherDescription(voucher.get(i).getVoucherDescription());
