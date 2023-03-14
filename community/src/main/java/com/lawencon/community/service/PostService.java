@@ -27,7 +27,6 @@ import com.lawencon.community.model.PostPollingDetail;
 import com.lawencon.community.model.PostType;
 import com.lawencon.community.model.User;
 import com.lawencon.community.pojo.PojoRes;
-import com.lawencon.community.pojo.category.PojoCategoryRes;
 import com.lawencon.community.pojo.pollinganswer.PojoPollingAnswerReq;
 import com.lawencon.community.pojo.post.PojoPostCommentReq;
 import com.lawencon.community.pojo.post.PojoPostReq;
@@ -279,7 +278,7 @@ public class PostService {
 		pojoRes.setMessage("Thanks for answer the polling!");
 		return pojoRes;
 	}
-	
+
 	public List<PojoTypeResGetAll> getAll() {
 		final List<PostType> postType = postTypeDao.getAll();
 		final List<PojoTypeResGetAll> pojoResGetAll = new ArrayList<>();

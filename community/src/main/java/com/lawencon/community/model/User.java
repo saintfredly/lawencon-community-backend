@@ -10,30 +10,38 @@ import javax.persistence.UniqueConstraint;
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_user",
-uniqueConstraints = {
-        @UniqueConstraint(name = "user_bk", 
-                columnNames = {"email", "verificationCode"}
-        )})
+@Table(name = "t_user", uniqueConstraints = {
+		@UniqueConstraint(name = "user_bk", columnNames = { "email", "verificationCode" }) })
 public class User extends BaseEntity {
 	@Column(length = 50, nullable = false)
 	private String email;
-	
+
 	@Column(nullable = false)
 	private String passwords;
-	
+
 	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
-	
+
 	@OneToOne
 	@JoinColumn(name = "photo")
 	private File file;
-	
+
 	@Column(length = 6, nullable = false)
 	private String verificationCode;
-	
+
 	private Boolean isVerified;
+
+	@OneToOne(mappedBy = "user")
+	private UserProfile userProfile;
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
 
 	public String getEmail() {
 		return email;

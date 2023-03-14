@@ -1,6 +1,8 @@
 package com.lawencon.community.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,7 @@ import com.lawencon.community.model.UserPremium;
 import com.lawencon.community.model.UserProfile;
 import com.lawencon.community.pojo.PojoRes;
 import com.lawencon.community.pojo.userpremium.PojoUserPremiumReq;
+import com.lawencon.community.pojo.userpremium.PojoUserPremiumRes;
 import com.lawencon.security.principal.PrincipalService;
 
 @Service
@@ -82,14 +85,11 @@ public class UserPremiumService {
 		
 		userPremiumDao.save(userPremium);
 		
-		UserProfile userProfiles = new UserProfile();
-		userProfiles = userProfileDao.getUserProfile(userPremium.getUser().getId()).get();
-		
 		UserProfile userProfile = new UserProfile();
-		userProfile = userProfileDao.getByIdAndDetach(UserProfile.class, userProfiles.getId());
+		userProfile = userProfileDao.getByIdAndDetach(UserProfile.class, userPremium.getUser().getUserProfile().getId());
 		
 		userProfile.setSubscribe(true);
-		userProfile.setVersion(userProfiles.getVersion());
+		userProfile.setVersion(userPremium.getUser().getUserProfile().getVersion());
 		
 		userProfileDao.save(userProfile);
 
@@ -98,5 +98,25 @@ public class UserPremiumService {
 		final PojoRes pojoRes = new PojoRes();
 		pojoRes.setMessage("Approved!");
 		return pojoRes;
+	}
+	
+	public List<PojoUserPremiumRes> getAllApprove() {
+		final List<UserPremium> userPremium = userPremiumDao.getAll();
+		final List<PojoUserPremiumRes> pojoResGet = new ArrayList<>();
+
+		for (int i = 0; i < userPremium.size(); i++) {
+			final PojoUserPremiumRes pojoUserPremiumRes = new PojoUserPremiumRes();
+
+			pojoUserPremiumRes.setId(userPremium.get(i).getId());
+			pojoUserPremiumRes.setProofOfPayment(userPremium.get(i).getFile().getId());
+			pojoUserPremiumRes.setDatePayment(userPremium.get(i).getDatePayment());
+			pojoUserPremiumRes.setFullName(userPremium.get(i).getUser().getUserProfile().getFullName());
+			pojoUserPremiumRes.setVer(userPremium.get(i).getVersion());
+
+			pojoResGet.add(pojoUserPremiumRes);
+		}
+
+		return pojoResGet;
+
 	}
 }
