@@ -10,7 +10,6 @@ import com.lawencon.base.ConnHandler;
 import com.lawencon.community.model.File;
 import com.lawencon.community.model.Role;
 import com.lawencon.community.model.User;
-import com.lawencon.community.model.UserProfile;
 
 @Repository
 public class UserDao extends BaseMasterDao<User> {
@@ -32,6 +31,10 @@ public class UserDao extends BaseMasterDao<User> {
 	public Optional<User> getByIdAndDetach(String id) {
 		return Optional.ofNullable(super.getByIdAndDetach(User.class, id));
 	}
+	
+	public Optional<User> getByIdRef(String id) {
+		return Optional.ofNullable(super.getByIdRef(User.class, id));
+	} 
 
 	public Optional<User> getByEmail(String email) {
 		User user = null;
