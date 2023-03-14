@@ -1,5 +1,8 @@
 package com.lawencon.community.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -24,9 +27,11 @@ import com.lawencon.community.model.PostPollingDetail;
 import com.lawencon.community.model.PostType;
 import com.lawencon.community.model.User;
 import com.lawencon.community.pojo.PojoRes;
+import com.lawencon.community.pojo.category.PojoCategoryRes;
 import com.lawencon.community.pojo.pollinganswer.PojoPollingAnswerReq;
 import com.lawencon.community.pojo.post.PojoPostCommentReq;
 import com.lawencon.community.pojo.post.PojoPostReq;
+import com.lawencon.community.pojo.type.PojoTypeResGetAll;
 import com.lawencon.security.principal.PrincipalService;
 
 @Service
@@ -271,5 +276,22 @@ public class PostService {
 		final PojoRes pojoRes = new PojoRes();
 		pojoRes.setMessage("Thanks for answer the polling!");
 		return pojoRes;
+	}
+	
+	public List<PojoTypeResGetAll> getAll() {
+		final List<PostType> postType = postTypeDao.getAll();
+		final List<PojoTypeResGetAll> pojoResGetAll = new ArrayList<>();
+
+		for (int i = 0; i < postType.size(); i++) {
+			final PojoTypeResGetAll pojoTypeRes = new PojoTypeResGetAll();
+
+			pojoTypeRes.setPostTypeId(postType.get(i).getId());
+			pojoTypeRes.setPostTypeCode(postType.get(i).getPostTypeCode());
+			pojoTypeRes.setPostTypeName(postType.get(i).getPostTypeName());
+			pojoResGetAll.add(pojoTypeRes);
+		}
+
+		return pojoResGetAll;
+
 	}
 }
