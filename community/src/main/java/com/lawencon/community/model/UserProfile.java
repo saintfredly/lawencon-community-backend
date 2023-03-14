@@ -1,5 +1,7 @@
 package com.lawencon.community.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -36,8 +38,8 @@ public class UserProfile extends BaseEntity {
 	@Column(length = 15)
 	private String phone;
 
-	private float balance;
-	private boolean subscribe;
+	private BigDecimal balance;
+	private Boolean subscribe;
 
 	public User getUser() {
 		return user;
@@ -95,19 +97,19 @@ public class UserProfile extends BaseEntity {
 		this.phone = phone;
 	}
 
-	public float getBalance() {
+	public BigDecimal getBalance() {
 		return balance;
 	}
 
-	public void setBalance(float balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 
-	public boolean isSubscribe() {
+	public Boolean isSubscribe() {
 		return subscribe;
 	}
 
-	public void setSubscribe(boolean subscribe) {
+	public void setSubscribe(Boolean subscribe) {
 		this.subscribe = subscribe;
 	}
 

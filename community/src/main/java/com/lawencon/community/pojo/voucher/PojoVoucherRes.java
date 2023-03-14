@@ -1,5 +1,6 @@
 package com.lawencon.community.pojo.voucher;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PojoVoucherRes {
@@ -10,6 +11,8 @@ public class PojoVoucherRes {
 	private Integer amount;
 	private LocalDateTime dateStart;
 	private LocalDateTime dateExpired;
+	private BigDecimal maxDiscount;
+	private BigDecimal minTransaction;
 	private LocalDateTime createdAt;
 	private Boolean isActive;
 	private Integer ver;
@@ -92,6 +95,22 @@ public class PojoVoucherRes {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public BigDecimal getMaxDiscount() {
+		return maxDiscount;
+	}
+
+	public void setMaxDiscount(BigDecimal maxDiscount) {
+		this.maxDiscount = maxDiscount;
+	}
+
+	public BigDecimal getMinTransaction() {
+		return minTransaction;
+	}
+
+	public void setMinTransaction(BigDecimal minTransaction) {
+		this.minTransaction = minTransaction;
 	}
 
 }
