@@ -7,29 +7,26 @@ import org.springframework.stereotype.Service;
 import com.lawencon.base.ConnHandler;
 import com.lawencon.community.dao.CategoryDao;
 import com.lawencon.community.dao.FileDao;
-import com.lawencon.community.dao.PostBookmarkDao;
+import com.lawencon.community.dao.PollingAnswerDao;
 import com.lawencon.community.dao.PostCommentDao;
 import com.lawencon.community.dao.PostDao;
-import com.lawencon.community.dao.PostLikeDao;
 import com.lawencon.community.dao.PostPollingDao;
 import com.lawencon.community.dao.PostPollingDetailDao;
 import com.lawencon.community.dao.PostTypeDao;
 import com.lawencon.community.dao.UserDao;
 import com.lawencon.community.model.Category;
 import com.lawencon.community.model.File;
+import com.lawencon.community.model.PollingAnswer;
 import com.lawencon.community.model.Post;
-import com.lawencon.community.model.PostBookmark;
 import com.lawencon.community.model.PostComment;
-import com.lawencon.community.model.PostLike;
 import com.lawencon.community.model.PostPolling;
 import com.lawencon.community.model.PostPollingDetail;
 import com.lawencon.community.model.PostType;
 import com.lawencon.community.model.User;
 import com.lawencon.community.pojo.PojoRes;
+import com.lawencon.community.pojo.pollinganswer.PojoPollingAnswerReq;
 import com.lawencon.community.pojo.post.PojoPostCommentReq;
 import com.lawencon.community.pojo.post.PojoPostReq;
-import com.lawencon.community.pojo.post.bookmark.PojoPostBookmarkReq;
-import com.lawencon.community.pojo.post.like.PojoPostLikeReq;
 import com.lawencon.security.principal.PrincipalService;
 
 @Service
@@ -43,16 +40,15 @@ public class PostService {
 	private final CategoryDao categoryDao;
 	private final UserDao userDao;
 	private final PostCommentDao postCommentDao;
-	private final PostLikeDao postLikeDao;
-	private final PostBookmarkDao postBookmarkDao;
+	private final PollingAnswerDao pollingAnswerDao;
 
 	@Inject
 	private final PrincipalService principalService;
 
-	public PostService(PostLikeDao postLikeDao, PostBookmarkDao postBookmarkDao, PostCommentDao postCommentDao,
-			UserDao userDao, PrincipalService principalService, PostPollingDetailDao postPollingDetailDao,
-			PostPollingDao postPollingDao, PostDao postDao, PostTypeDao postTypeDao, FileDao fileDao,
-			CategoryDao categoryDao) {
+	public PostService(PollingAnswerDao pollingAnswerDao, PostCommentDao postCommentDao, UserDao userDao,
+			PrincipalService principalService, PostPollingDetailDao postPollingDetailDao, PostPollingDao postPollingDao,
+			PostDao postDao, PostTypeDao postTypeDao, FileDao fileDao, CategoryDao categoryDao) {
+
 		this.postDao = postDao;
 		this.postTypeDao = postTypeDao;
 		this.fileDao = fileDao;
@@ -62,8 +58,8 @@ public class PostService {
 		this.principalService = principalService;
 		this.userDao = userDao;
 		this.postCommentDao = postCommentDao;
-		this.postBookmarkDao = postBookmarkDao;
-		this.postLikeDao = postLikeDao;
+		this.pollingAnswerDao = pollingAnswerDao;
+
 	}
 
 	public PojoRes save(PojoPostReq data) {
@@ -78,15 +74,17 @@ public class PostService {
 
 		post.setPostType(postType);
 
-		final File file = new File();
-		file.setFileName(data.getPhoto().getFileName());
-		file.setFileContent(data.getPhoto().getFileContent());
-		file.setFileExtension(data.getPhoto().getFileExtension());
-		file.setIsActive(true);
+		if (data.getPhoto() != null) {
+			final File file = new File();
+			file.setFileName(data.getPhoto().getFileName());
+			file.setFileContent(data.getPhoto().getFileContent());
+			file.setFileExtension(data.getPhoto().getFileExtension());
+			file.setIsActive(true);
 
-		fileDao.save(file);
+			fileDao.save(file);
 
-		post.setFile(file);
+			post.setFile(file);
+		}
 
 		final Category category = categoryDao.getByIdRef(Category.class, data.getCategoryId());
 
@@ -255,79 +253,23 @@ public class PostService {
 		return pojoRes;
 	}
 
-	public PojoRes saveLike(PojoPostLikeReq data) {
+	public PojoRes savePollingAnswer(PojoPollingAnswerReq data) {
 		ConnHandler.begin();
-		final PostLike postLike = new PostLike();
 
-		final Post post = postDao.getByIdRef(Post.class, data.getPostId());
-		postLike.setPost(post);
+		final PollingAnswer pollingAnswer = new PollingAnswer();
+
+		final PostPollingDetail postPollingDetail = postPollingDetailDao.getByIdRef(PostPollingDetail.class,
+				data.getPostPollingDetailId());
+		pollingAnswer.setPostPollingDetail(postPollingDetail);
 
 		final User user = userDao.getByIdRef(User.class, principalService.getAuthPrincipal());
-		postLike.setUser(user);
+		pollingAnswer.setUser(user);
 
-		postLike.setStatus(data.getStatus());
-		postLike.setIsActive(true);
-
-		postLikeDao.save(postLike);
+		pollingAnswerDao.save(pollingAnswer);
 
 		ConnHandler.commit();
 		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Like posts!");
+		pojoRes.setMessage("Thanks for answer the polling!");
 		return pojoRes;
-	}
-
-	public PojoRes deleteLike(String id) {
-		ConnHandler.begin();
-		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Unlike Posts!");
-		final PojoRes pojoResFail = new PojoRes();
-		pojoResFail.setMessage("Unlike Failed!");
-
-		Boolean result = postLikeDao.deleteById(PostLike.class, id);
-		ConnHandler.commit();
-
-		if (result == true) {
-			return pojoRes;
-		} else {
-			return pojoResFail;
-		}
-	}
-
-	public PojoRes saveBookmark(PojoPostBookmarkReq data) {
-		ConnHandler.begin();
-		final PostBookmark postBookmark = new PostBookmark();
-
-		final Post post = postDao.getByIdRef(Post.class, data.getPostId());
-		postBookmark.setPost(post);
-
-		final User user = userDao.getByIdRef(User.class, principalService.getAuthPrincipal());
-		postBookmark.setUser(user);
-
-		postBookmark.setStatus(data.getStatus());
-		postBookmark.setIsActive(true);
-
-		postBookmarkDao.save(postBookmark);
-
-		ConnHandler.commit();
-		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Bookmark posts!");
-		return pojoRes;
-	}
-
-	public PojoRes deleteBookmark(String id) {
-		ConnHandler.begin();
-		final PojoRes pojoRes = new PojoRes();
-		pojoRes.setMessage("Unbookmark Posts!");
-		final PojoRes pojoResFail = new PojoRes();
-		pojoResFail.setMessage("Unbookmark Failed!");
-
-		Boolean result = postBookmarkDao.deleteById(PostBookmark.class, id);
-		ConnHandler.commit();
-
-		if (result == true) {
-			return pojoRes;
-		} else {
-			return pojoResFail;
-		}
 	}
 }
