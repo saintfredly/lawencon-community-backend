@@ -32,7 +32,7 @@ public class UserProfileDao extends BaseMasterDao<UserProfile> {
 	public Optional<UserProfile> getUserProfile(String userId) {
 		UserProfile userProfile = null;
 		try {
-			final String sql = "SELECT tu.id,tu.ver FROM t_user_profile tu "
+			final String sql = "SELECT tu.id,tu.full_name,tu.ver FROM t_user_profile tu "
 					+ "WHERE tu.user_id=:userId AND tu.is_active=TRUE";
 			final Object result = ConnHandler.getManager().createNativeQuery(sql).setParameter("userId", userId).getSingleResult();
 
@@ -41,7 +41,8 @@ public class UserProfileDao extends BaseMasterDao<UserProfile> {
 				final Object[] objArr = (Object[]) result;
 
 				userProfile.setId(objArr[0].toString());
-				userProfile.setVersion(Integer.valueOf(objArr[1].toString()));
+				userProfile.setFullName(objArr[1].toString());
+				userProfile.setVersion(Integer.valueOf(objArr[2].toString()));
 				
 				
 			}

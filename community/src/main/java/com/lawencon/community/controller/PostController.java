@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.community.pojo.PojoRes;
-import com.lawencon.community.pojo.category.PojoCategoryRes;
 import com.lawencon.community.pojo.pollinganswer.PojoPollingAnswerReq;
 import com.lawencon.community.pojo.post.PojoPostCommentReq;
 import com.lawencon.community.pojo.post.PojoPostReq;
