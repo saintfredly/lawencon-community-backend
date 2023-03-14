@@ -1,5 +1,6 @@
 package com.lawencon.community.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -27,14 +28,20 @@ public class Voucher extends BaseEntity {
 	
 	private String voucherDescription;
 	
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private Integer amount;
 	
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private LocalDateTime dateStart;
 	
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	private LocalDateTime dateExpired;
+	
+	@Column(nullable = false)
+	private BigDecimal maxDiscount;
+	
+	@Column(nullable = false)
+	private BigDecimal minDiscount;
 
 	public String getVoucherCode() {
 		return voucherCode;
@@ -82,6 +89,22 @@ public class Voucher extends BaseEntity {
 
 	public void setDateExpired(LocalDateTime dateExpired) {
 		this.dateExpired = dateExpired;
+	}
+
+	public BigDecimal getMaxDiscount() {
+		return maxDiscount;
+	}
+
+	public void setMaxDiscount(BigDecimal maxDiscount) {
+		this.maxDiscount = maxDiscount;
+	}
+
+	public BigDecimal getMinDiscount() {
+		return minDiscount;
+	}
+
+	public void setMinDiscount(BigDecimal minDiscount) {
+		this.minDiscount = minDiscount;
 	}
 
 }

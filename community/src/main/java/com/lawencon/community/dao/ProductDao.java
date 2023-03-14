@@ -28,6 +28,10 @@ public class ProductDao extends BaseMasterDao<Product> {
 	public Optional<Product> getByIdAndDetach(String id) {
 		return Optional.ofNullable(super.getByIdAndDetach(Product.class, id));
 	}
+	
+	public Optional<Product> getByIdRef(String id) {
+		return Optional.ofNullable(super.getByIdRef(Product.class, id));
+	} 
 
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllByProductType(String code) {

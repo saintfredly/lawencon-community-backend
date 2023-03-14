@@ -14,8 +14,6 @@ import com.lawencon.base.BaseEntity;
 uniqueConstraints = {
         @UniqueConstraint(name = "user_bk", 
                 columnNames = {"email", "verificationCode"}
-        ), @UniqueConstraint(name = "user_ck", 
-                columnNames = {"role_id", "photo"}
         )})
 public class User extends BaseEntity {
 	@Column(length = 50, nullable = false)

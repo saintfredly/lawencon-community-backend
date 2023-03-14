@@ -13,51 +13,27 @@ import javax.persistence.UniqueConstraint;
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_payment",
+@Table(name = "t_user_premium",
 uniqueConstraints = {
-        @UniqueConstraint(name = "payment_ck", 
-                columnNames = {"proof_of_payment", "user_id", "voucher_id", "product_id"}
+        @UniqueConstraint(name = "user_premium_ck", 
+                columnNames = {"proof_of_payment", "user_id"}
         )})
-public class Payment extends BaseEntity {
+public class UserPremium extends BaseEntity {
 
-	@OneToOne
-	@JoinColumn(name = "voucher_id")
-	private Voucher voucher;
-	
-	@OneToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
-	
 	@Column(nullable = false)
 	private LocalDateTime datePayment;
-	
+
 	@Column(nullable = false)
-	private BigDecimal grandTotal;
-	
+	private BigDecimal price;
+
 	@OneToOne
 	@JoinColumn(name = "proof_of_payment")
 	private File file;
-	
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	private Boolean isApproved;
-
-	public Voucher getVoucher() {
-		return voucher;
-	}
-
-	public void setVoucher(Voucher voucher) {
-		this.voucher = voucher;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 
 	public LocalDateTime getDatePayment() {
 		return datePayment;
@@ -67,12 +43,12 @@ public class Payment extends BaseEntity {
 		this.datePayment = datePayment;
 	}
 
-	public BigDecimal getGrandTotal() {
-		return grandTotal;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
-	public void setGrandTotal(BigDecimal grandTotal) {
-		this.grandTotal = grandTotal;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public File getFile() {
