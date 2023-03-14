@@ -3,7 +3,6 @@ package com.lawencon.community.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -13,35 +12,32 @@ import javax.persistence.UniqueConstraint;
 import com.lawencon.base.BaseEntity;
 
 @Entity
-@Table(name = "t_voucher",
-uniqueConstraints = {
-        @UniqueConstraint(name = "voucher_bk", 
-                columnNames = {"voucherCode"}
-        )})
+@Table(name = "t_voucher", uniqueConstraints = {
+		@UniqueConstraint(name = "voucher_bk", columnNames = { "voucherCode" }) })
 public class Voucher extends BaseEntity {
 
 	@Column(nullable = false, length = 5)
 	private String voucherCode;
-	
+
 	@Column(unique = true, nullable = false, length = 50)
 	private String voucherName;
-	
+
 	private String voucherDescription;
-	
+
 	@Column(nullable = false)
 	private Integer amount;
-	
+
 	@Column(nullable = false)
 	private LocalDateTime dateStart;
-	
+
 	@Column(nullable = false)
 	private LocalDateTime dateExpired;
-	
+
 	@Column(nullable = false)
 	private BigDecimal maxDiscount;
-	
-	@Column(nullable = false)
-	private BigDecimal minDiscount;
+
+	@Column( nullable = false)
+	private BigDecimal minTransaction;
 
 	public String getVoucherCode() {
 		return voucherCode;
@@ -99,12 +95,12 @@ public class Voucher extends BaseEntity {
 		this.maxDiscount = maxDiscount;
 	}
 
-	public BigDecimal getMinDiscount() {
-		return minDiscount;
+	public BigDecimal getMinTransaction() {
+		return minTransaction;
 	}
 
-	public void setMinDiscount(BigDecimal minDiscount) {
-		this.minDiscount = minDiscount;
+	public void setMinTransaction(BigDecimal minTransaction) {
+		this.minTransaction = minTransaction;
 	}
 
 }

@@ -270,6 +270,8 @@ public class PostService {
 		final User user = userDao.getByIdRef(User.class, principalService.getAuthPrincipal());
 		pollingAnswer.setUser(user);
 
+		pollingAnswer.setIsActive(true);
+
 		pollingAnswerDao.save(pollingAnswer);
 
 		ConnHandler.commit();

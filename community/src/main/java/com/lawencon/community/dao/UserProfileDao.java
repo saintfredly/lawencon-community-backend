@@ -29,4 +29,27 @@ public class UserProfileDao extends BaseMasterDao<UserProfile> {
 		return Optional.ofNullable(super.getByIdAndDetach(UserProfile.class, id));
 	}
 
+	public Optional<UserProfile> getUserProfile(String userId) {
+		UserProfile userProfile = null;
+		try {
+			final String sql = "SELECT tu.id,tu.ver FROM t_user_profile tu "
+					+ "WHERE tu.user_id=:userId AND tu.is_active=TRUE";
+			final Object result = ConnHandler.getManager().createNativeQuery(sql).setParameter("userId", userId).getSingleResult();
+
+			if (result != null) {
+				userProfile = new UserProfile();
+				final Object[] objArr = (Object[]) result;
+
+				userProfile.setId(objArr[0].toString());
+				userProfile.setVersion(Integer.valueOf(objArr[1].toString()));
+				
+				
+			}
+
+		} catch (Exception e) {
+			
+		}
+
+		return Optional.ofNullable(userProfile);
+	}
 }

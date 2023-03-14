@@ -3,7 +3,7 @@ package com.lawencon.community.constant;
 import java.math.BigDecimal;
 
 public enum SubscribeEnum {
-	PREMIUM("Premium", new BigDecimal("150.000"));
+	PREMIUM("Premium", new BigDecimal("150000"));
 
 	private String name;
 	private BigDecimal price;

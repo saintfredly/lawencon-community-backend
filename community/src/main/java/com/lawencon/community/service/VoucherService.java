@@ -39,6 +39,8 @@ public class VoucherService {
 		voucher.setAmount(data.getAmount());
 		voucher.setDateStart(data.getDateStart());
 		voucher.setDateExpired(data.getDateExpired());
+		voucher.setMaxDiscount(data.getMaxDiscount());
+		voucher.setMinTransaction(data.getMinTransaction());
 
 		voucher.setIsActive(true);
 
@@ -63,6 +65,8 @@ public class VoucherService {
 		voucher.setAmount(data.getAmount());
 		voucher.setDateStart(data.getDateStart());
 		voucher.setDateExpired(data.getDateExpired());
+		voucher.setMaxDiscount(data.getMaxDiscount());
+		voucher.setMinTransaction(data.getMinTransaction());
 
 		voucher.setVersion(data.getVer());
 		voucher.setIsActive(data.getIsActive());
@@ -106,6 +110,8 @@ public class VoucherService {
 			pojoVoucherRes.setAmount(voucher.get(i).getAmount());
 			pojoVoucherRes.setDateStart(voucher.get(i).getDateStart());
 			pojoVoucherRes.setDateExpired(voucher.get(i).getDateExpired());
+			pojoVoucherRes.setMaxDiscount(voucher.get(i).getMaxDiscount());
+			pojoVoucherRes.setMinTransaction(voucher.get(i).getMinTransaction());
 			pojoVoucherRes.setCreatedAt(voucher.get(i).getCreatedAt());
 			pojoVoucherRes.setIsActive(voucher.get(i).getIsActive());
 			pojoVoucherRes.setVer(voucher.get(i).getVersion());
