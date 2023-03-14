@@ -1,8 +1,11 @@
 package com.lawencon.community.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lawencon.community.pojo.PojoRes;
+import com.lawencon.community.pojo.category.PojoCategoryRes;
 import com.lawencon.community.pojo.pollinganswer.PojoPollingAnswerReq;
 import com.lawencon.community.pojo.post.PojoPostCommentReq;
 import com.lawencon.community.pojo.post.PojoPostReq;
 import com.lawencon.community.pojo.post.bookmark.PojoPostBookmarkReq;
 import com.lawencon.community.pojo.post.like.PojoPostLikeReq;
+import com.lawencon.community.pojo.type.PojoTypeResGetAll;
 import com.lawencon.community.service.PostBookmarkService;
 import com.lawencon.community.service.PostLikeService;
 import com.lawencon.community.service.PostService;
@@ -85,6 +90,12 @@ public class PostController {
 	@DeleteMapping("/bookmark/{id}")
 	public ResponseEntity<PojoRes> deleteBookmark(@PathVariable("id") String id) {
 		final PojoRes res = postBookmarkService.deleteById(id);
+		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
+	
+	@GetMapping("/type")
+	public ResponseEntity<List<PojoTypeResGetAll>> getAll() {
+		final List<PojoTypeResGetAll> res = postService.getAll();
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 }
